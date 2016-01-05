@@ -1,2 +1,3 @@
 # AndroidCircleCropper
 Android library project for cropping images by circle border.....
+![](https://raw.githubusercontent.com/ruilyzhu/AndroidCircleCropper/master/screenshoot/crop_demo.gif)
