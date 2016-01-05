@@ -28,7 +28,7 @@ public class CropImageLayout extends RelativeLayout {
 
     private CropZoomImageView mCropIv;
     private CropImageBorderView mBorderView;
-    private int mHorizontalPadding;
+    private int mHorizontalPadding=20;
     private Context context;
 
 
@@ -47,9 +47,10 @@ public class CropImageLayout extends RelativeLayout {
         mBorderView = (CropImageBorderView) findViewById(R.id.borderView);
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.CropImageLayout);
         mHorizontalPadding = (int) a.getDimension(R.styleable.CropImageLayout_mHorizontalPadding, 20);
-        a.recycle();
         mCropIv.setHorizontalPadding(mHorizontalPadding);
         mBorderView.setHorizontalPadding(mHorizontalPadding);
+        a.recycle();
+
     }
 
     public void setImageUri(Uri sourceUri

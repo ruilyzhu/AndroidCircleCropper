@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">AndroidCropper</string>
+    <string name="choose_photo_tips">choose the photo</string>
 </resources>

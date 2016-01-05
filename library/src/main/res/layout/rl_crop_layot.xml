@@ -4,12 +4,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.find.app.view.CropZoomImageView
+    <com.ruily.crop.CropZoomImageView
         android:id="@+id/iv_crop"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <com.find.app.view.CropImageBorderView
+    <com.ruily.crop.CropImageBorderView
         android:id="@+id/borderView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

@@ -34,7 +34,7 @@ public class CropZoomImageView extends ImageView implements ScaleGestureDetector
     /**
      * 水平方向与View的边距
      */
-    private int mHorizontalPadding = 20;
+    private int mHorizontalPadding;
     /**
      * 垂直方向与View的边距
      */
@@ -67,6 +67,7 @@ public class CropZoomImageView extends ImageView implements ScaleGestureDetector
     @Override
     public void onGlobalLayout() {
         if (once) {
+
             Drawable d = getDrawable();
             if (d == null)
                 return;
@@ -76,7 +77,6 @@ public class CropZoomImageView extends ImageView implements ScaleGestureDetector
             int height = getHeight();
             int dw = d.getIntrinsicWidth();
             int dh = d.getIntrinsicHeight();
-//            mHorizontalPadding = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, mHorizontalPadding, getResources().getDisplayMetrics());
             mVerticalPadding = (height - (width - mHorizontalPadding * 2)) / 2;
 
             float scale = 1.0f;
@@ -131,7 +131,7 @@ public class CropZoomImageView extends ImageView implements ScaleGestureDetector
             }
 
             mScaleMatrix.postScale(scaleFactor, scaleFactor, detector.getFocusX(), detector.getFocusY());
-            checkBorderAndCenterWhenScacle();
+            checkRectWhenScacle();
             setImageMatrix(mScaleMatrix);
         }
 
@@ -143,7 +143,7 @@ public class CropZoomImageView extends ImageView implements ScaleGestureDetector
         return matrixValues[Matrix.MSCALE_X];
     }
 
-    private void checkBorderAndCenterWhenScacle() {
+    private void checkRectWhenScacle() {
         RectF rect = getMatrixRectF();
         float deltaX = 0;
         float deltaY = 0;
@@ -229,7 +229,16 @@ public class CropZoomImageView extends ImageView implements ScaleGestureDetector
             case MotionEvent.ACTION_MOVE:
                 float dx = x - mLastX;
                 float dy = y - mLastY;
+                RectF rectF = getMatrixRectF();
                 if (getDrawable() != null) {
+                    // 如果宽度小于屏幕宽度，则禁止左右移动
+                    if (rectF.width() < getWidth()) {
+                        dx = 0;
+                    }
+                    // 如果高度小雨屏幕高度，则禁止上下移动
+                    if (rectF.height() < getHeight()) {
+                        dy = 0;
+                    }
                     mScaleMatrix.postTranslate(dx, dy);
                     checkBorder();
                     setImageMatrix(mScaleMatrix);
@@ -260,7 +269,6 @@ public class CropZoomImageView extends ImageView implements ScaleGestureDetector
 
         int width = getWidth();
         int height = getHeight();
-
         // 如果宽或高大于屏幕，则控制范围
         if (rect.width() >= width - 2 * mHorizontalPadding) {
             if (rect.left > mHorizontalPadding) {

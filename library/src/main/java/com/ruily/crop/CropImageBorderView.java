@@ -19,7 +19,7 @@ public class CropImageBorderView extends View {
     private int mBorderColor = Color.parseColor("#FFFFFF");
 
 
-    private int mHorizontalPadding;
+    private int mHorizontalPadding = 20;
     private int mVerticalPadding;
 
     private int mWidth;
@@ -35,7 +35,6 @@ public class CropImageBorderView extends View {
 
     public CropImageBorderView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-//        mHorizontalPadding = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, mHorizontalPadding, getResources().getDisplayMetrics());
         mBorderWidth = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, mBorderWidth, getResources().getDisplayMetrics());
 //        mPaint = new Paint();
 //        mPaint.setAntiAlias(true);
@@ -46,7 +45,8 @@ public class CropImageBorderView extends View {
     private Path clipPath;
 
     public void setHorizontalPadding(int mHorizontalPadding) {
-        this.mHorizontalPadding = mHorizontalPadding;
+        this.mHorizontalPadding=mHorizontalPadding;
+
     }
 
     @Override
